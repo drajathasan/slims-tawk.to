@@ -10,13 +10,16 @@
 use SLiMS\Config;
 use SLiMS\Plugins;
 
+// Load Custom config such as csp etc
 Config::getInstance()->load(__DIR__ . '/config/');
 
+// Register menu as group
 Plugins::group('Tawk.to', function() {
    Plugins::menu('system', 'Chat', __DIR__ . '/pages/chat.php');
    Plugins::menu('system', 'Pengaturan Widget', __DIR__ . '/pages/configuration.php');
 })->before(__('CONFIGURATION'));
 
+// Hooking some js to load by template
 Plugins::hook(Plugins::CONTENT_BEFORE_LOAD, function($opac) {
    $opac->js = str_replace('\\', '', stripslashes(config('twak-to-js', '')));
 });

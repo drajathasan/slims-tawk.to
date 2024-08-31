@@ -9,11 +9,14 @@
  */
 use SLiMS\Config;
 use SLiMS\Plugins;
-$plugins = Plugins::getInstance();
 
 Config::getInstance()->load(__DIR__ . '/config/');
 
-$plugins->registerMenu('system', 'Widget', __DIR__ . '/pages/configuration');
-$plugins->register(Plugins::CONTENT_BEFORE_LOAD, function($opac) {
-   $opac->js = config('twak-to-js');
+Plugins::group('Tawk.to', function() {
+   Plugins::menu('system', 'Chat', __DIR__ . '/pages/chat.php');
+   Plugins::menu('system', 'Pengaturan Widget', __DIR__ . '/pages/configuration.php');
+})->before(__('CONFIGURATION'));
+
+Plugins::hook(Plugins::CONTENT_BEFORE_LOAD, function($opac) {
+   $opac->js = str_replace('\\', '', stripslashes(config('twak-to-js', '')));
 });

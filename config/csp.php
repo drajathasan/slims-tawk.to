@@ -15,7 +15,7 @@ return [
     "connect-src 'self' slims.web.id *.tawk.to wss://*.tawk.to",
     "frame-src 'self' *.google.com *.tawk.to",
     "font-src 'self' *.gstatic.com *.tawk.to",
-    "media-src 'self'",
+    "media-src 'self' *.tawk.to",
     "object-src 'self'",
     "manifest-src 'self'",
     "worker-src 'self'",

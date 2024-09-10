@@ -10,6 +10,7 @@
 use SLiMS\DB;
 use SLiMS\Config;
 use SLiMS\Plugins;
+use SLiMS\Url;
 
 if (!function_exists('pluginUrl'))
 {

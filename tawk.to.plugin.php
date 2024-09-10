@@ -11,6 +11,26 @@ use SLiMS\DB;
 use SLiMS\Config;
 use SLiMS\Plugins;
 
+if (!function_exists('pluginUrl'))
+{
+    /**
+     * Generate URL with plugin_container.php?id=<id>&mod=<mod> + custom query
+     *
+     * @param array $data
+     * @param boolean $reset
+     * @return string
+     */
+    function pluginUrl(array $data = [], bool $reset = false): string
+    {
+        // back to base uri
+        if ($reset) return Url::getSelf(fn($self) => $self . '?mod=' . $_GET['mod'] . '&id=' . $_GET['id']);
+        
+        return Url::getSelf(function($self) use($data) {
+            return $self . '?' . http_build_query(array_merge($_GET,$data));
+        });
+    }
+}
+
 if (method_exists(Plugins::class, 'group')) {
    // Load Custom config such as csp etc
    Config::getInstance()->load(__DIR__ . '/config/');
@@ -32,7 +52,7 @@ if (method_exists(Plugins::class, 'group')) {
    <link rel="stylesheet" href="{$url}"/>
    <div class="p-5">
       <h1>Yah</h1>
-      <p>Plugin TWAK.TO tidak kompatibel dengan SLiMS Anda 😔</p>
+      <p>Plugin TAWK.TO tidak kompatibel dengan SLiMS Anda 😔</p>
       <a href="/admin/?mod=system" class="notAJAX btn btn-primary">Kembali</a>
    </div>
    HTML);

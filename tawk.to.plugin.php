@@ -17,7 +17,6 @@ if (method_exists(Plugins::class, 'group')) {
 
    // Register menu as group
    Plugins::group('Tawk.to', function() {
-      Plugins::menu('system', 'Chat', __DIR__ . '/pages/chat.php');
       Plugins::menu('system', 'Pengaturan Widget', __DIR__ . '/pages/configuration.php');
    })->before(__('CONFIGURATION'));
 
